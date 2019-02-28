@@ -1,10 +1,78 @@
 <html>
 <head>
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style>
+    td{
+      width:50px;
+      text-align:center;
+      border:solid;
+    }
+    table{
+      border-collapse:collapse;
+    }
+    tr:nth-child(even){
+      background:#b3b3b3;
+    }
+    body{
+      padding-right:30%;
+      padding-left:30%;
+      margin-top:20%;
+    }
+
+
+
+    </style>
 </head>
 <body>
+  <h1>Table</h1>
   <script type="text/javascript">
-    
+    var names= ["Becky","Amon","Helen","Jack","Catherine"]
+    var ages = [18, 29, 20, 21, 23]
+    var majors = ["CS","PSY","SOC","MAT","ECO"]
+    var genders=["female","male","female","male","female"]
+
+    var Profile = function(age,major,gender){
+      return {
+        age:age,
+        major:major,
+        gender:gender,
+      }
+    };
+
+
+    var Person = function(name,age,major,gender){
+      return {
+        name:name,
+        age:age,
+        major:major,
+        gender:gender,
+      }
+    };
+
+    var persons=[]
+
+
+
+    for(var i=0;i<5;i++){
+      //var profile=Profile(ages[i],majors[i],genders[i]);
+      persons.push(Person(names[i], ages[i],majors[i],genders[i]));
+    }
+
+    d3.select("body").append("table").append('tr').selectAll('td').data(persons).enter().append("td").text(function(d){
+      return d.name
+      })
+
+    d3.select("table").append('tr').selectAll('td').data(persons).enter().append("td").text(function(d){
+      return d.major
+      })
+
+    d3.select('table').append('tr').selectAll('td').data(persons).enter().append("td").text(function(d){
+      return d.age
+      })
+
+    d3.select("table").append('tr').selectAll('td').data(persons).enter().append("td").text(function(d){
+      return d.gender
+      })
   </script>
 </body>
 
